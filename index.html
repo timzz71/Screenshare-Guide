@@ -2,235 +2,921 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>Magicians Quote Of The Day</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magicians Quote · DFIR Toolkit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Quicksand', sans-serif;
-      background: #0e1219;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0e17;
       color: #e8edf5;
+      padding: 20px 16px 50px;
       min-height: 100vh;
-      padding: 20px 16px 40px;
-      background-image: radial-gradient(circle at 20% 30%, #1a2838 0%, #0b0f16 100%);
-      display: flex;
-      justify-content: center;
     }
-    .container { max-width: 700px; width: 100%; }
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
 
-    @keyframes fadeUp { 0%{opacity:0;transform:translateY(30px)} 100%{opacity:1;transform:translateY(0)} }
-    @keyframes pulseGlow { 0%{box-shadow:0 0 0 0 rgba(100,180,255,0.4)} 70%{box-shadow:0 0 20px 10px rgba(100,180,255,0)} 100%{box-shadow:0 0 0 0 rgba(100,180,255,0)} }
-    .fade-item { animation: fadeUp 0.7s ease forwards; opacity:0; }
-    .delay-1 { animation-delay:0.1s; } .delay-2 { animation-delay:0.25s; } .delay-3 { animation-delay:0.4s; } .delay-4 { animation-delay:0.55s; } .delay-5 { animation-delay:0.7s; }
-
+    /* HEADER */
     .header {
-      text-align:center; margin-bottom:30px; padding:20px 0 10px;
-      background:rgba(20,30,44,0.6); backdrop-filter:blur(6px);
-      border-radius:40px; box-shadow:0 10px 30px -8px rgba(0,0,0,0.7);
-      border:1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 0 20px;
+      border-bottom: 1px solid #1e2a3a;
+      margin-bottom: 30px;
     }
-    .header h1 {
-      font-family:'Fredoka One',cursive; font-size:2.4rem;
-      background:linear-gradient(135deg,#f9d976,#f39c12); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:0 0 30px rgba(243,156,18,0.2);
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-    .header .sub { font-size:1rem; color:#a0b8d0; font-weight:600; letter-spacing:2px; }
-    .header .sub i { color:#f1c40f; margin:0 6px; }
-    .header .author { margin-top:8px; font-size:0.9rem; background:#1e2a3a; display:inline-block; padding:4px 20px; border-radius:40px; color:#b0c8e0; border:1px solid #2c4058; }
-    .header .author i { color:#f1c40f; margin-right:8px; }
+    .header-left .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f9d976, #f39c12);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .header-left .logo i {
+      -webkit-text-fill-color: #f1c40f;
+      margin-right: 6px;
+    }
+    .header-left .badge {
+      background: #1a2536;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #8aa3c9;
+      border: 1px solid #2a4058;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: #8aa3c9;
+    }
+    .header-right i {
+      color: #f1c40f;
+      margin-right: 4px;
+    }
+    .quote-mini {
+      background: #141e2b;
+      padding: 6px 16px;
+      border-radius: 30px;
+      border-left: 3px solid #f1c40f;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: #b8cce0;
+      cursor: pointer;
+      transition: 0.2s;
+      max-width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .quote-mini:hover {
+      background: #1c2a3c;
+    }
+    .quote-mini span {
+      color: #f1c40f;
+      font-style: normal;
+      font-weight: 600;
+    }
 
-    .quote-box {
-      background:#16212e; border-radius:30px; padding:18px 24px; margin:18px 0 28px;
-      border-left:6px solid #f1c40f; box-shadow:0 6px 20px rgba(0,0,0,0.5);
-      display:flex; align-items:center; gap:14px; cursor:pointer;
-      transition: background 0.3s;
+    /* SEARCH + FILTERS */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-bottom: 28px;
+      align-items: center;
     }
-    .quote-box:hover { background:#1d2c3d; }
-    .quote-box i { font-size:2rem; color:#f1c40f; opacity:0.7; }
-    .quote-box .quote-text { font-size:1.05rem; font-style:italic; color:#d6e4f0; line-height:1.4; }
-    .quote-box .quote-text span { display:block; margin-top:4px; font-size:0.85rem; font-weight:700; color:#f1c40f; font-style:normal; text-align:right; }
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      background: #111b26;
+      border-radius: 40px;
+      padding: 0 18px;
+      border: 1px solid #1e2a3a;
+      transition: 0.2s;
+    }
+    .search-box:focus-within {
+      border-color: #f1c40f;
+    }
+    .search-box i {
+      color: #5a7088;
+      font-size: 0.9rem;
+    }
+    .search-box input {
+      background: transparent;
+      border: none;
+      padding: 12px 14px;
+      color: #e8edf5;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      font-family: inherit;
+    }
+    .search-box input::placeholder {
+      color: #4a5a70;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-btn {
+      background: #111b26;
+      border: 1px solid #1e2a3a;
+      color: #8aa3c9;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      border-color: #3a5a7a;
+      color: #fff;
+    }
+    .filter-btn.active {
+      background: #f1c40f;
+      color: #0a0e17;
+      border-color: #f1c40f;
+    }
 
-    .card {
-      background:rgba(22,34,50,0.75); backdrop-filter:blur(4px);
-      border-radius:28px; padding:24px 22px; margin-bottom:24px;
-      border:1px solid rgba(255,255,255,0.05);
-      box-shadow:0 12px 30px -10px rgba(0,0,0,0.6);
-      transition: transform 0.2s, box-shadow 0.3s;
+    /* TOOL GRID */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
     }
-    .card:hover { transform:translateY(-4px); box-shadow:0 20px 40px -12px rgba(0,0,0,0.8); }
-    .card h2 { font-size:1.5rem; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:12px; color:#f0f6ff; }
-    .card h2 i { color:#5b9aff; width:32px; font-size:1.6rem; }
-    .card p, .card li { font-size:1rem; line-height:1.7; color:#c8d8e8; }
-    .card ul, .card ol { padding-left:24px; margin:10px 0; }
-    .card li { margin-bottom:8px; }
-    .highlight { background:#1f3144; padding:2px 14px; border-radius:30px; font-weight:600; color:#f1c40f; display:inline-block; }
+    .tool-card {
+      background: #111b26;
+      border-radius: 16px;
+      padding: 20px 22px;
+      border: 1px solid #1a2536;
+      transition: 0.25s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .tool-card:hover {
+      border-color: #2a4058;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7);
+    }
+    .tool-card .tool-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .tool-card .tool-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tool-card .tool-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 12px;
+      border-radius: 20px;
+      background: #1a2536;
+      color: #8aa3c9;
+      border: 1px solid #1e2a3a;
+      white-space: nowrap;
+    }
+    .tool-card .tool-tag.ps1 {
+      background: #1a2a3a;
+      color: #5b9aff;
+      border-color: #2a4a6a;
+    }
+    .tool-card .tool-tag.github {
+      background: #1a2a2a;
+      color: #6cc4a0;
+      border-color: #2a4a4a;
+    }
+    .tool-card .tool-tag.exe {
+      background: #2a1a2a;
+      color: #d47b9a;
+      border-color: #4a2a3a;
+    }
+    .tool-card .tool-tag.web {
+      background: #1a1a2a;
+      color: #b08ad4;
+      border-color: #3a2a4a;
+    }
+    .tool-card .tool-desc {
+      color: #b0c4de;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 6px 0 12px;
+      flex: 1;
+    }
+    .tool-card .tool-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      border-top: 1px solid #1a2536;
+      padding-top: 14px;
+    }
+    .tool-card .tool-actions a,
+    .tool-card .tool-actions button {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      background: #1a2536;
+      color: #b0c4de;
+      border: 1px solid #1e2a3a;
+    }
+    .tool-card .tool-actions a:hover,
+    .tool-card .tool-actions button:hover {
+      background: #2a4058;
+      color: #fff;
+    }
+    .tool-card .tool-actions .copy-btn {
+      background: #1a2a2a;
+      color: #6cc4a0;
+      border-color: #2a4a4a;
+    }
+    .tool-card .tool-actions .copy-btn:hover {
+      background: #2a4a4a;
+    }
+    .tool-card .tool-actions .link-btn {
+      background: #1a2a3a;
+      color: #5b9aff;
+      border-color: #2a4a6a;
+    }
+    .tool-card .tool-actions .link-btn:hover {
+      background: #2a4a6a;
+    }
 
-    .btn {
-      display:inline-block; background:linear-gradient(145deg,#2a4a6a,#1a3048); padding:12px 28px;
-      border-radius:60px; font-weight:700; font-size:1rem; color:#fff; border:none;
-      box-shadow:0 6px 16px rgba(0,0,0,0.4); cursor:pointer; transition:all 0.2s;
-      text-decoration:none; letter-spacing:0.5px; border:1px solid rgba(255,255,255,0.08);
+    /* PHASE BADGE */
+    .phase-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: #1a2a2a;
+      color: #6cc4a0;
+      border: 1px solid #2a4a4a;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
     }
-    .btn i { margin-right:10px; }
-    .btn-primary { background:linear-gradient(145deg,#f1c40f,#f39c12); color:#0b0f16; box-shadow:0 6px 20px rgba(241,196,15,0.25); }
-    .btn-primary:hover { transform:scale(1.04); box-shadow:0 8px 28px rgba(241,196,15,0.4); }
-    .btn-outline { background:transparent; border:2px solid #5b9aff; color:#5b9aff; box-shadow:none; }
-    .btn-outline:hover { background:#5b9aff; color:#0b0f16; }
-    .btn-pulse { animation:pulseGlow 2s infinite; }
 
-    .step-mini {
-      display:flex; gap:14px; align-items:flex-start; margin:16px 0 10px;
-      padding:14px 16px; background:rgba(30,46,66,0.5); border-radius:18px; border-left:4px solid #5b9aff;
+    /* EMPTY STATE */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #5a7088;
+      grid-column: 1 / -1;
     }
-    .step-mini .num { font-family:'Fredoka One',cursive; font-size:1.6rem; color:#5b9aff; min-width:36px; opacity:0.7; }
-    .step-mini .content { flex:1; }
-    .step-mini .content strong { color:#fff; display:block; font-size:1.05rem; }
+    .no-results i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: #2a4058;
+    }
 
-    .glossary-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:12px;
+    /* FOOTER */
+    .footer {
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid #1a2536;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: #4a5a70;
     }
-    .glossary-item {
-      background:rgba(30,46,66,0.4); padding:14px; border-radius:16px; border-left:3px solid #f1c40f;
+    .footer a {
+      color: #6a8aaa;
+      text-decoration: none;
     }
-    .glossary-item strong { display:block; color:#fff; font-size:1.05rem; }
-    .glossary-item .def { font-size:0.9rem; color:#b0c8e0; margin-top:4px; }
+    .footer a:hover {
+      color: #b0c4de;
+    }
+    .footer .disclaimer {
+      max-width: 600px;
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: #3a4a5a;
+    }
 
-    @media (max-width:480px) { .header h1 { font-size:2rem; } .card { padding:18px; } .step-mini { padding:12px; } }
-    .footer { text-align:center; margin-top:40px; padding:16px; font-size:0.85rem; color:#5a7088; border-top:1px solid #1f2f40; }
-    .footer i { color:#f1c40f; }
-    .text-center { text-align:center; }
-    .mt-2 { margin-top:20px; }
-    .flex-center { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .header-right {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .quote-mini {
+        max-width: 100%;
+        white-space: normal;
+        font-size: 0.75rem;
+        padding: 6px 14px;
+      }
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 400px) {
+      .tool-card .tool-top {
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <header class="header fade-item delay-1">
-    <h1><i class="fas fa-hat-wizard" style="background:transparent;-webkit-text-fill-color:#f1c40f;margin-right:8px;"></i>Magicians Quote Of The Day</h1>
-    <div class="sub"><i class="fas fa-magic"></i> Screenshare · made simple <i class="fas fa-magic"></i></div>
-    <div class="author"><i class="fas fa-pen-fancy"></i> by Tim$erz</div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo"><i class="fas fa-hat-wizard"></i>Magicians Quote</div>
+      <span class="badge">DFIR toolkit</span>
+    </div>
+    <div class="header-right">
+      <span><i class="fas fa-user"></i> Tim$erz</span>
+      <div class="quote-mini" id="quoteDisplay" title="Click for another quote">
+        <i class="fas fa-quote-left" style="margin-right:6px;color:#f1c40f;"></i>
+        <span id="quoteText">Trust, but verify.</span>
+        <span id="quoteAuthor" style="margin-left:6px;">— Tim$erz</span>
+      </div>
+    </div>
   </header>
 
-  <div class="quote-box fade-item delay-2">
-    <i class="fas fa-quote-left"></i>
-    <div class="quote-text">
-      “The best magicians don't hide the truth — they make it obvious enough that nobody looks.”
-      <span>— Tim$erz, today</span>
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search tools by name, category, or description..." />
+    </div>
+    <div class="filter-group" id="filterGroup">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="anti-forensic">Anti‑forensic</button>
+      <button class="filter-btn" data-filter="artifact">Artifact</button>
+      <button class="filter-btn" data-filter="mods">Mods</button>
+      <button class="filter-btn" data-filter="macro">Macro</button>
+      <button class="filter-btn" data-filter="services">Services</button>
+      <button class="filter-btn" data-filter="client">Client</button>
+      <button class="filter-btn" data-filter="others">Others</button>
     </div>
   </div>
 
-  <!-- 1. What is a screenshare? -->
-  <div class="card fade-item delay-2">
-    <h2><i class="fas fa-question-circle"></i> What is a screenshare?</h2>
-    <p>A screenshare is simply a <strong>live video tour</strong> of your computer screen, guided by a staff member. They ask to see your screen to make sure everyone is playing fairly. It’s a routine check – nothing scary, and you always have the final say.</p>
-    <p style="margin-top:10px;"><span class="highlight">🔑 You must agree</span> – it’s voluntary. You can stop at any time.</p>
+  <!-- TOOLS GRID -->
+  <div class="tools-grid" id="toolsGrid">
+    <!-- Tools will be injected by JavaScript -->
   </div>
 
-  <!-- 2. Why do they do it? -->
-  <div class="card fade-item delay-3">
-    <h2><i class="fas fa-shield-alt"></i> Why do staff ask for screenshares?</h2>
-    <p>To keep the game fair for everyone. They want to confirm you’re not using any unauthorised programs that give you an unfair advantage. It’s not personal – it’s about protecting the community.</p>
-  </div>
-
-  <!-- 3. What will they look at? -->
-  <div class="card fade-item delay-3">
-    <h2><i class="fas fa-search"></i> What will they check?</h2>
-    <p>They’ll ask to see a few places on your PC. Here’s the simple version:</p>
-    <div class="step-mini"><div class="num">1</div><div class="content"><strong>Running programs</strong> – they open Task Manager (Ctrl+Shift+Esc) to see what’s currently active.</div></div>
-    <div class="step-mini"><div class="num">2</div><div class="content"><strong>Your Minecraft folder</strong> – they peek inside <code>.minecraft</code>, especially <strong>mods</strong> and <strong>versions</strong> folders.</div></div>
-    <div class="step-mini"><div class="num">3</div><div class="content"><strong>Startup apps</strong> – they check what programs launch when Windows starts (just a quick list).</div></div>
-    <div class="step-mini"><div class="num">4</div><div class="content"><strong>Recent files</strong> – a glance at Downloads or Desktop for any new, unfamiliar files.</div></div>
-    <div class="step-mini"><div class="num">5</div><div class="content"><strong>Extra tools</strong> – sometimes they run a safe scanner that only reads files (it doesn’t install anything).</div></div>
-    <p style="margin-top:10px;">They <strong>will not</strong> look at your personal files (photos, documents, etc.) – only what’s relevant to the game.</p>
-  </div>
-
-  <!-- 4. What should you do? -->
-  <div class="card fade-item delay-4">
-    <h2><i class="fas fa-lightbulb"></i> How should you prepare?</h2>
-    <ul>
-      <li><strong>Stay calm</strong> – it’s a normal procedure. Just follow the staff member’s instructions.</li>
-      <li><strong>Be cooperative</strong> – answer questions honestly and open folders when asked.</li>
-      <li><strong>Ask if you’re confused</strong> – they should explain everything in simple terms.</li>
-      <li><strong>Close extra apps</strong> – it makes the process faster.</li>
-      <li><strong>Have your voice chat ready</strong> – they’ll guide you through.</li>
-    </ul>
-    <div class="text-center mt-2">
-      <button class="btn btn-primary btn-pulse" onclick="alert('📋 Quick reminder: Stay calm, cooperate, ask questions, and it will be over in a few minutes. You’re in control.')">
-        <i class="fas fa-clipboard-check"></i> Show me a quick summary
-      </button>
-    </div>
-  </div>
-
-  <!-- 5. Privacy and your rights -->
-  <div class="card fade-item delay-5">
-    <h2><i class="fas fa-lock"></i> Your privacy & rights</h2>
-    <ul>
-      <li><strong>Only share with trusted staff</strong> – verify they are official.</li>
-      <li><strong>Share your screen, NOT control</strong> – they should never take over your mouse or keyboard.</li>
-      <li><strong>You can say “stop” anytime</strong> – no questions asked, no penalties.</li>
-      <li><strong>Recordings are kept private</strong> – only used for this check.</li>
-    </ul>
-    <div class="flex-center mt-2"><span class="highlight"><i class="fas fa-check-circle"></i> You’re always in control</span></div>
-  </div>
-
-  <!-- 6. Common terms (glossary) -->
-  <div class="card fade-item delay-5">
-    <h2><i class="fas fa-book-open"></i> Simple glossary of terms you might hear</h2>
-    <div class="glossary-grid">
-      <div class="glossary-item"><strong>Obfuscation</strong><div class="def">Code that’s made hard to read – sometimes used by cheat makers, but also by legitimate mods. It’s a clue, not proof.</div></div>
-      <div class="glossary-item"><strong>Signature</strong><div class="def">A known pattern that detectors look for. A match can be a lead, but sometimes it’s a false alarm.</div></div>
-      <div class="glossary-item"><strong>Hash</strong><div class="def">A unique fingerprint for a file. If two files have the same hash, they are identical.</div></div>
-      <div class="glossary-item"><strong>Prefetch</strong><div class="def">A Windows record that shows a program ran and roughly when – helps build a timeline.</div></div>
-      <div class="glossary-item"><strong>BAM</strong><div class="def">Another Windows record that tracks program activity – used to confirm other records.</div></div>
-      <div class="glossary-item"><strong>Amcache</strong><div class="def">A history of file details, even if the file is now deleted – can show what was once on your PC.</div></div>
-      <div class="glossary-item"><strong>USN Journal</strong><div class="def">A log of file changes (created, renamed, deleted) – helps explain missing files.</div></div>
-      <div class="glossary-item"><strong>False positive</strong><div class="def">A warning that looks suspicious but has an innocent explanation – that’s why one tool result is never final.</div></div>
-    </div>
-  </div>
-
-  <!-- 7. Final tips -->
-  <div class="card fade-item delay-5">
-    <h2><i class="fas fa-star"></i> Final tips for a smooth experience</h2>
-    <ul>
-      <li>If you’re unsure about a file, just ask – it might be harmless.</li>
-      <li>Remember that false alarms happen – a weird file doesn’t mean you’re guilty.</li>
-      <li>The staff are there to help, not to trick you. Be honest and it will be quick.</li>
-      <li>After the screenshare, you can go back to playing normally.</li>
-    </ul>
-  </div>
-
-  <!-- Action button -->
-  <div class="text-center" style="margin-top:20px;">
-    <a href="#" class="btn btn-outline" onclick="alert('📌 Remember: A screenshare is just a conversation with proof. Stay honest, stay calm, and everything will be fine. — Tim$erz'); return false;">
-      <i class="fas fa-bookmark"></i> Save this guide
-    </a>
-  </div>
-
+  <!-- FOOTER -->
   <footer class="footer">
-    <i class="fas fa-hat-wizard"></i> Magicians Quote Of The Day · by Tim$erz · <i class="fas fa-magic"></i> for everyone
+    <div class="disclaimer">
+      <i class="fas fa-triangle-exclamation" style="color:#f1c40f;margin-right:6px;"></i>
+      The catalog surfaces supplied external tools and commands as references only.
+      Verify a repository, release, or raw script before running it on an investigation machine,
+      and preserve evidence before using any remediation option.
+    </div>
+    <div>
+      <i class="fas fa-magic" style="color:#f1c40f;margin-right:6px;"></i>
+      Magicians Quote DFIR · by Tim$erz
+    </div>
   </footer>
 
-  <script>
-    const quotes = [
-      { text: "The best magicians don't hide the truth — they make it obvious enough that nobody looks.", author: "Tim$erz" },
-      { text: "Fair play is the greatest trick of all.", author: "Tim$erz" },
-      { text: "A screenshare is just a conversation with proof.", author: "Tim$erz" },
-      { text: "Trust, but verify. That's the magic word.", author: "Tim$erz" }
-    ];
-    let qIndex = 0;
-    const quoteText = document.querySelector('.quote-text');
-    const quoteAuthor = document.querySelector('.quote-text span');
-    document.querySelector('.quote-box').addEventListener('click', function() {
-      qIndex = (qIndex + 1) % quotes.length;
-      const q = quotes[qIndex];
-      const textNode = quoteText.childNodes[0];
-      if (textNode) textNode.textContent = q.text + ' ';
-      quoteAuthor.textContent = '— ' + q.author + ', today';
-    });
-  </script>
 </div>
+
+<script>
+  // ============================================================
+  // TOOL DATABASE – 55+ tools from screensharing.vip
+  // ============================================================
+  const tools = [
+    // ---- Anti-forensic ----
+    {
+      id: 'meowresolver',
+      name: 'MeowResolver',
+      category: 'anti-forensic',
+      type: 'ps1',
+      desc: 'Detects and optionally reverses bypass / anti-forensic tampering across registry, event logs, and filesystem.',
+      phase: 1,
+      link: 'https://raw.githubusercontent.com/MeowTonynoh/MeowResolver/main/MeowResolver.ps1',
+      command: 'powershell -Command "Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/MeowTonynoh/MeowResolver/main/MeowResolver.ps1\')"'
+    },
+    {
+      id: 'filelessbypass',
+      name: 'FilelessBypassDetection.ps1',
+      category: 'anti-forensic',
+      type: 'ps1',
+      desc: 'Scans for fileless-execution bypass artifacts, including in-memory loaders and reflection-based injection traces.',
+      phase: 1,
+      link: 'https://raw.githubusercontent.com/l4rpsucks/Scripts/main/FilelessBypassDetection.ps1',
+      command: 'powershell -Command "Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/l4rpsucks/Scripts/refs/heads/main/FilelessBypassDetection.ps1\')"'
+    },
+
+    // ---- Artifact parsers ----
+    {
+      id: 'prefetchview',
+      name: 'PrefetchView',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Parses .pf files, verifies signatures, runs YARA, and cross-checks USN Journal evidence.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/PrefetchView',
+      command: ''
+    },
+    {
+      id: 'bamreveal',
+      name: 'BAMReveal',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Parses Background Activity Moderator data for independent execution evidence.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/BAMReveal',
+      command: ''
+    },
+    {
+      id: 'userassistview',
+      name: 'UserAssistView',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Parses UserAssist registry artifacts including execution counts, timestamps, focus metrics, signatures, and YARA generics.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/UserAssistView',
+      command: ''
+    },
+    {
+      id: 'amcacheview',
+      name: 'AmcacheView',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Parses Amcache and cross-references entries with on-disk details, signatures, and journal activity.',
+      phase: 2,
+      link: 'https://github.com/spokwn/AmcacheView',
+      command: ''
+    },
+    {
+      id: 'journalparser',
+      name: 'JournalParser',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Parses the USN Journal directly via the $J datastream for deletion and rename confirmation.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/JournalParser',
+      command: ''
+    },
+    {
+      id: 'stringsparser',
+      name: 'StringsParser',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Extracts and matches known cheat-signature strings in binaries or memory dumps.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/StringsParser',
+      command: ''
+    },
+    {
+      id: 'usbdetector',
+      name: 'USBDetector',
+      category: 'artifact',
+      type: 'github',
+      desc: 'Flags USB connection history for removable-media loading or mid-investigation device swaps.',
+      phase: 2,
+      link: 'https://github.com/Orbdiff/USBDetector',
+      command: ''
+    },
+
+    // ---- Mods ----
+    {
+      id: 'meowmodanalyzer',
+      name: 'MeowModAnalyzer',
+      category: 'mods',
+      type: 'ps1',
+      desc: 'Static analysis of .minecraft/mods; classifies files, flags obfuscation, and checks known module names.',
+      phase: 3,
+      link: 'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1',
+      command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1\')"'
+    },
+    {
+      id: 'zeezyparser',
+      name: 'zeezyparser.ps1',
+      category: 'mods',
+      type: 'ps1',
+      desc: 'Parses JAR contents from the versions/mods folder rather than relying only on signature matching.',
+      phase: 3,
+      link: 'https://raw.githubusercontent.com/zeezyexe/zeezy-jar-parser/main/zeezyparser.ps1',
+      command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/zeezy-jar-parser/refs/heads/main/zeezyparser.ps1\')"'
+    },
+
+    // ---- Macro ----
+    {
+      id: 'catchmacro',
+      name: 'catchmacro.ps1',
+      category: 'macro',
+      type: 'ps1',
+      desc: 'Macro scanner from zeezy; designed to identify macro-related indicators.',
+      phase: 3,
+      link: 'https://raw.githubusercontent.com/zeezyexe/macro-scanner/main/catchmacro.ps1',
+      command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/macro-scanner/refs/heads/main/catchmacro.ps1\')"'
+    },
+
+    // ---- Services ----
+    {
+      id: 'zeezyservices',
+      name: 'zeezyservices.ps1',
+      category: 'services',
+      type: 'ps1',
+      desc: 'Checks running and installed Windows services for known bypass / cheat-loader indicators.',
+      phase: 3,
+      link: 'https://raw.githubusercontent.com/zeezyexe/services-checker/main/zeezyservices.ps1',
+      command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/services-checker/refs/heads/main/zeezyservices.ps1\')"'
+    },
+
+    // ---- Client detectors ----
+    {
+      id: 'meowclientfucker',
+      name: 'MeowClientFucker',
+      category: 'client',
+      type: 'exe',
+      desc: 'General-purpose client detector; release executable is run directly.',
+      phase: 4,
+      link: 'https://github.com/MeowTonynoh/MeowClientFucker/releases',
+      command: ''
+    },
+    {
+      id: 'meowdoomsdayfucker',
+      name: 'MeowDoomsdayFucker',
+      category: 'client',
+      type: 'exe',
+      desc: 'Doomsday detector with live-memory signature scanning and historical Prefetch trace analysis.',
+      phase: 4,
+      link: 'https://github.com/MeowTonynoh/MeowDoomsdayFucker/releases',
+      command: ''
+    },
+    {
+      id: 'meownovowarefucker',
+      name: 'MeowNovowareFucker',
+      category: 'client',
+      type: 'exe',
+      desc: 'Novoware-specific client detector.',
+      phase: 4,
+      link: 'https://github.com/MeowTonynoh/MeowNovowareFucker/releases',
+      command: ''
+    },
+    {
+      id: 'dqrkisfucker',
+      name: 'DQRKIS-FUCKER',
+      category: 'client',
+      type: 'ps1',
+      desc: 'DQRKIS client artifact detector.',
+      phase: 4,
+      link: 'https://raw.githubusercontent.com/cheesecatlol/DQRKIS-FUCKER/main/DqrkisFucker.ps1',
+      command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/cheesecatlol/DQRKIS-FUCKER/refs/heads/main/DqrkisFucker.ps1\')"'
+    },
+
+    // ---- Others (Zimmerman, NirSoft, etc.) ----
+    {
+      id: 'r laltchecker',
+      name: 'RL AltChecker',
+      category: 'others',
+      type: 'github',
+      desc: 'RedLotus – checks for alternate-account indicators.',
+      phase: 0,
+      link: 'https://github.com/RedLotus/RL-AltChecker',
+      command: ''
+    },
+    {
+      id: 'computeractivityview',
+      name: 'ComputerActivityView',
+      category: 'others',
+      type: 'web',
+      desc: 'NirSoft – timeline of computer activity events.',
+      phase: 0,
+      link: 'https://www.nirsoft.net/utils/computer_activity_view.html',
+      command: ''
+    },
+    {
+      id: 'amcacheparser',
+      name: 'AmcacheParser',
+      category: 'others',
+      type: 'web',
+      desc: 'Parses AMCache with YARA and signatures.',
+      phase: 0,
+      link: 'https://ericzimmerman.github.io/#!index.md',
+      command: ''
+    },
+    {
+      id: 'systeminformer',
+      name: 'SystemInformer',
+      category: 'others',
+      type: 'web',
+      desc: 'Advanced process and kernel inspector.',
+      phase: 0,
+      link: 'https://systeminformer.sourceforge.io/',
+      command: ''
+    },
+    {
+      id: 'dieengine',
+      name: 'DIE-engine',
+      category: 'others',
+      type: 'web',
+      desc: 'Detects file type, packer, and compiler.',
+      phase: 0,
+      link: 'https://github.com/horsicq/Detect-It-Easy',
+      command: ''
+    },
+    {
+      id: 'jarabel',
+      name: 'Jarabel',
+      category: 'others',
+      type: 'github',
+      desc: 'Locates .jar files with detailed checks.',
+      phase: 0,
+      link: 'https://github.com/Jarabel/Jarabel',
+      command: ''
+    },
+    {
+      id: 'luyten',
+      name: 'Luyten',
+      category: 'others',
+      type: 'github',
+      desc: 'Open-source Java decompiler GUI using Procyon for static analysis.',
+      phase: 0,
+      link: 'https://github.com/deathmarine/Luyten',
+      command: ''
+    },
+    {
+      id: 'vmaware',
+      name: 'VMAware',
+      category: 'others',
+      type: 'github',
+      desc: 'Advanced VM detection library and tool.',
+      phase: 0,
+      link: 'https://github.com/CheckPointSW/VMAware',
+      command: ''
+    },
+    {
+      id: 'velociraptor',
+      name: 'Velociraptor',
+      category: 'others',
+      type: 'github',
+      desc: 'Endpoint DFIR and threat-hunting agent for deeper investigations.',
+      phase: 0,
+      link: 'https://github.com/Velocidex/velociraptor',
+      command: ''
+    },
+    {
+      id: 'ntfsparser',
+      name: 'NTFS Parser',
+      category: 'others',
+      type: 'github',
+      desc: 'NTFS forensics covering MFT, BitLocker, and USN data.',
+      phase: 0,
+      link: 'https://github.com/libyal/libfsntfs',
+      command: ''
+    },
+    {
+      id: 'hayabusa',
+      name: 'Hayabusa',
+      category: 'others',
+      type: 'github',
+      desc: 'Fast forensic timeline generator.',
+      phase: 0,
+      link: 'https://github.com/Yamato-Security/hayabusa',
+      command: ''
+    },
+    {
+      id: 'everything',
+      name: 'Everything',
+      category: 'others',
+      type: 'web',
+      desc: 'Instant filename search engine for Windows.',
+      phase: 0,
+      link: 'https://www.voidtools.com/',
+      command: ''
+    },
+    {
+      id: 'hxd',
+      name: 'HxD',
+      category: 'others',
+      type: 'web',
+      desc: 'Hex editor with disk and RAM editing capabilities.',
+      phase: 0,
+      link: 'https://mh-nexus.de/en/hxd/',
+      command: ''
+    },
+    // ---- Zimmerman tools ----
+    { id: 'bstrings', name: 'bstrings', category: 'others', type: 'web', desc: 'Zimmerman – searches strings with regex and YARA.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'jlecmd', name: 'JLECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses Windows Jump List files from the CLI.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'jumplistexplorer', name: 'JumpListExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for Jump List artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'mftecmd', name: 'MFTECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses MFT, UsnJrnl, LogFile, and Boot records.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'pecmd', name: 'PECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses Windows Prefetch files from the CLI.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'recentfilecacheparser', name: 'RecentFileCacheParser', category: 'others', type: 'web', desc: 'Zimmerman – parses RecentFileCache.bcf artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'registryexplorer', name: 'RegistryExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for Windows registry hives.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'shellbagsexplorer', name: 'ShellBagsExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for ShellBags artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'srumecmd', name: 'SrumECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses the SRUM database for usage data.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'timelineexplorer', name: 'TimelineExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI viewer for CSV timeline output.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    // ---- NirSoft tools ----
+    { id: 'fulleventlogview', name: 'FullEventLogView', category: 'others', type: 'web', desc: 'NirSoft – views all Windows event log entries.', phase: 0, link: 'https://www.nirsoft.net/utils/full_event_log_view.html', command: '' },
+    { id: 'networkusageview', name: 'NetworkUsageView', category: 'others', type: 'web', desc: 'NirSoft – shows network usage per process.', phase: 0, link: 'https://www.nirsoft.net/utils/network_usage_view.html', command: '' },
+    { id: 'browserdownloadsview', name: 'BrowserDownloadsView', category: 'others', type: 'web', desc: 'NirSoft – lists browser download history.', phase: 0, link: 'https://www.nirsoft.net/utils/browser_downloads_view.html', command: '' },
+    { id: 'alternatestreamview', name: 'AlternateStreamView', category: 'others', type: 'web', desc: 'NirSoft – reveals hidden NTFS alternate streams.', phase: 0, link: 'https://www.nirsoft.net/utils/alternate_stream_view.html', command: '' },
+    { id: 'usbdeview', name: 'USBDeview', category: 'others', type: 'web', desc: 'NirSoft – lists USB devices previously connected.', phase: 0, link: 'https://www.nirsoft.net/utils/usb_deview.html', command: '' },
+    { id: 'opensavefilesview', name: 'OpenSaveFilesView', category: 'others', type: 'web', desc: 'NirSoft – shows files opened or saved through dialogs.', phase: 0, link: 'https://www.nirsoft.net/utils/open_save_files_view.html', command: '' },
+    { id: 'executedprogramslist', name: 'ExecutedProgramsList', category: 'others', type: 'web', desc: 'NirSoft – lists programs run from various sources.', phase: 0, link: 'https://www.nirsoft.net/utils/executed_programs_list.html', command: '' },
+    { id: 'taskschedulerview', name: 'TaskSchedulerView', category: 'others', type: 'web', desc: 'NirSoft – views scheduled tasks and history.', phase: 0, link: 'https://www.nirsoft.net/utils/task_scheduler_view.html', command: '' },
+    { id: 'jumplistsview', name: 'JumpListsView', category: 'others', type: 'web', desc: 'NirSoft – views Jump List recent and frequent files.', phase: 0, link: 'https://www.nirsoft.net/utils/jump_lists_view.html', command: '' },
+    { id: 'winprefetchview', name: 'WinPrefetchView', category: 'others', type: 'web', desc: 'NirSoft – views Windows Prefetch details.', phase: 0, link: 'https://www.nirsoft.net/utils/win_prefetch_view.html', command: '' },
+    { id: 'regscanner', name: 'RegScanner', category: 'others', type: 'web', desc: 'NirSoft – scans the registry for values and patterns.', phase: 0, link: 'https://www.nirsoft.net/utils/regscanner.html', command: '' },
+    { id: 'shellbagsview', name: 'ShellBagsView', category: 'others', type: 'web', desc: 'NirSoft – views ShellBags folder-access history.', phase: 0, link: 'https://www.nirsoft.net/utils/shell_bags_view.html', command: '' },
+    // ---- Dependencies ----
+    { id: 'dotnet9', name: '.NET 9.0', category: 'others', type: 'web', desc: 'Microsoft .NET 9 SDK/runtime dependency.', phase: 0, link: 'https://dotnet.microsoft.com/en-us/download/dotnet/9.0', command: '' },
+    { id: 'dotnet10', name: '.NET 10.0', category: 'others', type: 'web', desc: 'Microsoft .NET 10 runtime dependency.', phase: 0, link: 'https://dotnet.microsoft.com/en-us/download/dotnet/10.0', command: '' },
+    { id: 'vsredist', name: 'VSRedist', category: 'others', type: 'web', desc: 'Visual C++ Redistributable for x64.', phase: 0, link: 'https://aka.ms/vs/17/release/vc_redist.x64.exe', command: '' },
+  ];
+
+  // ============================================================
+  // RENDER
+  // ============================================================
+  const grid = document.getElementById('toolsGrid');
+  const searchInput = document.getElementById('searchInput');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  function getTypeLabel(type) {
+    const map = { ps1: 'PS1', github: 'GitHub', exe: 'EXE', web: 'Web' };
+    return map[type] || type;
+  }
+
+  function getTypeClass(type) {
+    const map = { ps1: 'ps1', github: 'github', exe: 'exe', web: 'web' };
+    return map[type] || '';
+  }
+
+  function getPhaseLabel(phase) {
+    if (phase === 1) return 'Phase 1 · Anti‑forensic';
+    if (phase === 2) return 'Phase 2 · Artifact';
+    if (phase === 3) return 'Phase 3 · Mods/Macro/Services';
+    if (phase === 4) return 'Phase 4 · Client';
+    return '';
+  }
+
+  function renderTools() {
+    const filtered = tools.filter(t => {
+      const matchFilter = currentFilter === 'all' || t.category === currentFilter;
+      const search = currentSearch.toLowerCase().trim();
+      const matchSearch = !search ||
+        t.name.toLowerCase().includes(search) ||
+        t.category.toLowerCase().includes(search) ||
+        t.desc.toLowerCase().includes(search);
+      return matchFilter && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="no-results">
+          <i class="fas fa-search"></i>
+          <p>No tools match your search or filter.</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(t => {
+      const phaseLabel = getPhaseLabel(t.phase);
+      const typeLabel = getTypeLabel(t.type);
+      const typeClass = getTypeClass(t.type);
+
+      let actions = '';
+      if (t.command) {
+        const escaped = t.command.replace(/'/g, "\\'");
+        actions += `<button class="copy-btn" onclick="copyCommand('${escaped}')"><i class="fas fa-copy"></i> Copy PS1</button>`;
+      }
+      if (t.link) {
+        actions += `<a href="${t.link}" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> ${t.type === 'github' ? 'GitHub' : t.type === 'ps1' ? 'Raw' : 'Open'}</a>`;
+      }
+
+      return `
+        <div class="tool-card" data-category="${t.category}">
+          ${phaseLabel ? `<div class="phase-badge">${phaseLabel}</div>` : ''}
+          <div class="tool-top">
+            <span class="tool-name">${t.name}</span>
+            <span class="tool-tag ${typeClass}">${typeLabel}</span>
+          </div>
+          <div class="tool-desc">${t.desc}</div>
+          <div class="tool-actions">${actions}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ============================================================
+  // COPY COMMAND
+  // ============================================================
+  window.copyCommand = function(cmd) {
+    navigator.clipboard.writeText(cmd).then(() => {
+      const btn = event.target.closest('.copy-btn');
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => btn.innerHTML = orig, 2000);
+      }
+    }).catch(() => {
+      alert('Failed to copy. Please select and copy manually:\n\n' + cmd);
+    });
+  };
+
+  // ============================================================
+  // SEARCH + FILTER EVENTS
+  // ============================================================
+  searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value;
+    renderTools();
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderTools();
+    });
+  });
+
+  // ============================================================
+  // QUOTE ROTATOR
+  // ============================================================
+  const quotes = [
+    { text: "The best magicians don't hide the truth — they make it obvious enough that nobody looks.", author: "Tim$erz" },
+    { text: "Fair play is the greatest trick of all.", author: "Tim$erz" },
+    { text: "Trust, but verify. That's the magic word.", author: "Tim$erz" },
+    { text: "A screenshare is just a conversation with proof.", author: "Tim$erz" },
+    { text: "Evidence + context + consistency → decision.", author: "Tim$erz" },
+    { text: "One tool result is a lead, not a verdict.", author: "Tim$erz" },
+    { text: "Preserve first, then investigate.", author: "Tim$erz" },
+  ];
+  let quoteIndex = 0;
+  const quoteTextEl = document.getElementById('quoteText');
+  const quoteAuthorEl = document.getElementById('quoteAuthor');
+  const quoteDisplay = document.getElementById('quoteDisplay');
+
+  quoteDisplay.addEventListener('click', () => {
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    const q = quotes[quoteIndex];
+    quoteTextEl.textContent = q.text;
+    quoteAuthorEl.textContent = '— ' + q.author;
+  });
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  renderTools();
+</script>
 </body>
 </html>
