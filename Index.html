@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Magicians Quote Of The Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #0e1219;
+      color: #e8edf5;
+      min-height: 100vh;
+      padding: 20px 16px 40px;
+      background-image: radial-gradient(circle at 20% 30%, #1a2838 0%, #0b0f16 100%);
+      display: flex;
+      justify-content: center;
+    }
+    .container { max-width: 700px; width: 100%; }
+
+    @keyframes fadeUp { 0%{opacity:0;transform:translateY(30px)} 100%{opacity:1;transform:translateY(0)} }
+    @keyframes pulseGlow { 0%{box-shadow:0 0 0 0 rgba(100,180,255,0.4)} 70%{box-shadow:0 0 20px 10px rgba(100,180,255,0)} 100%{box-shadow:0 0 0 0 rgba(100,180,255,0)} }
+    .fade-item { animation: fadeUp 0.7s ease forwards; opacity:0; }
+    .delay-1 { animation-delay:0.1s; } .delay-2 { animation-delay:0.25s; } .delay-3 { animation-delay:0.4s; } .delay-4 { animation-delay:0.55s; } .delay-5 { animation-delay:0.7s; }
+
+    .header {
+      text-align:center; margin-bottom:30px; padding:20px 0 10px;
+      background:rgba(20,30,44,0.6); backdrop-filter:blur(6px);
+      border-radius:40px; box-shadow:0 10px 30px -8px rgba(0,0,0,0.7);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .header h1 {
+      font-family:'Fredoka One',cursive; font-size:2.4rem;
+      background:linear-gradient(135deg,#f9d976,#f39c12); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      text-shadow:0 0 30px rgba(243,156,18,0.2);
+    }
+    .header .sub { font-size:1rem; color:#a0b8d0; font-weight:600; letter-spacing:2px; }
+    .header .sub i { color:#f1c40f; margin:0 6px; }
+    .header .author { margin-top:8px; font-size:0.9rem; background:#1e2a3a; display:inline-block; padding:4px 20px; border-radius:40px; color:#b0c8e0; border:1px solid #2c4058; }
+    .header .author i { color:#f1c40f; margin-right:8px; }
+
+    .quote-box {
+      background:#16212e; border-radius:30px; padding:18px 24px; margin:18px 0 28px;
+      border-left:6px solid #f1c40f; box-shadow:0 6px 20px rgba(0,0,0,0.5);
+      display:flex; align-items:center; gap:14px; cursor:pointer;
+      transition: background 0.3s;
+    }
+    .quote-box:hover { background:#1d2c3d; }
+    .quote-box i { font-size:2rem; color:#f1c40f; opacity:0.7; }
+    .quote-box .quote-text { font-size:1.05rem; font-style:italic; color:#d6e4f0; line-height:1.4; }
+    .quote-box .quote-text span { display:block; margin-top:4px; font-size:0.85rem; font-weight:700; color:#f1c40f; font-style:normal; text-align:right; }
+
+    .card {
+      background:rgba(22,34,50,0.75); backdrop-filter:blur(4px);
+      border-radius:28px; padding:24px 22px; margin-bottom:24px;
+      border:1px solid rgba(255,255,255,0.05);
+      box-shadow:0 12px 30px -10px rgba(0,0,0,0.6);
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .card:hover { transform:translateY(-4px); box-shadow:0 20px 40px -12px rgba(0,0,0,0.8); }
+    .card h2 { font-size:1.5rem; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:12px; color:#f0f6ff; }
+    .card h2 i { color:#5b9aff; width:32px; font-size:1.6rem; }
+    .card p, .card li { font-size:1rem; line-height:1.7; color:#c8d8e8; }
+    .card ul, .card ol { padding-left:24px; margin:10px 0; }
+    .card li { margin-bottom:8px; }
+    .highlight { background:#1f3144; padding:2px 14px; border-radius:30px; font-weight:600; color:#f1c40f; display:inline-block; }
+
+    .btn {
+      display:inline-block; background:linear-gradient(145deg,#2a4a6a,#1a3048); padding:12px 28px;
+      border-radius:60px; font-weight:700; font-size:1rem; color:#fff; border:none;
+      box-shadow:0 6px 16px rgba(0,0,0,0.4); cursor:pointer; transition:all 0.2s;
+      text-decoration:none; letter-spacing:0.5px; border:1px solid rgba(255,255,255,0.08);
+    }
+    .btn i { margin-right:10px; }
+    .btn-primary { background:linear-gradient(145deg,#f1c40f,#f39c12); color:#0b0f16; box-shadow:0 6px 20px rgba(241,196,15,0.25); }
+    .btn-primary:hover { transform:scale(1.04); box-shadow:0 8px 28px rgba(241,196,15,0.4); }
+    .btn-outline { background:transparent; border:2px solid #5b9aff; color:#5b9aff; box-shadow:none; }
+    .btn-outline:hover { background:#5b9aff; color:#0b0f16; }
+    .btn-pulse { animation:pulseGlow 2s infinite; }
+
+    .step-mini {
+      display:flex; gap:14px; align-items:flex-start; margin:16px 0 10px;
+      padding:14px 16px; background:rgba(30,46,66,0.5); border-radius:18px; border-left:4px solid #5b9aff;
+    }
+    .step-mini .num { font-family:'Fredoka One',cursive; font-size:1.6rem; color:#5b9aff; min-width:36px; opacity:0.7; }
+    .step-mini .content { flex:1; }
+    .step-mini .content strong { color:#fff; display:block; font-size:1.05rem; }
+
+    .glossary-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:12px;
+    }
+    .glossary-item {
+      background:rgba(30,46,66,0.4); padding:14px; border-radius:16px; border-left:3px solid #f1c40f;
+    }
+    .glossary-item strong { display:block; color:#fff; font-size:1.05rem; }
+    .glossary-item .def { font-size:0.9rem; color:#b0c8e0; margin-top:4px; }
+
+    @media (max-width:480px) { .header h1 { font-size:2rem; } .card { padding:18px; } .step-mini { padding:12px; } }
+    .footer { text-align:center; margin-top:40px; padding:16px; font-size:0.85rem; color:#5a7088; border-top:1px solid #1f2f40; }
+    .footer i { color:#f1c40f; }
+    .text-center { text-align:center; }
+    .mt-2 { margin-top:20px; }
+    .flex-center { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header fade-item delay-1">
+    <h1><i class="fas fa-hat-wizard" style="background:transparent;-webkit-text-fill-color:#f1c40f;margin-right:8px;"></i>Magicians Quote Of The Day</h1>
+    <div class="sub"><i class="fas fa-magic"></i> Screenshare · made simple <i class="fas fa-magic"></i></div>
+    <div class="author"><i class="fas fa-pen-fancy"></i> by Tim$erz</div>
+  </header>
+
+  <div class="quote-box fade-item delay-2">
+    <i class="fas fa-quote-left"></i>
+    <div class="quote-text">
+      “The best magicians don't hide the truth — they make it obvious enough that nobody looks.”
+      <span>— Tim$erz, today</span>
+    </div>
+  </div>
+
+  <!-- 1. What is a screenshare? -->
+  <div class="card fade-item delay-2">
+    <h2><i class="fas fa-question-circle"></i> What is a screenshare?</h2>
+    <p>A screenshare is simply a <strong>live video tour</strong> of your computer screen, guided by a staff member. They ask to see your screen to make sure everyone is playing fairly. It’s a routine check – nothing scary, and you always have the final say.</p>
+    <p style="margin-top:10px;"><span class="highlight">🔑 You must agree</span> – it’s voluntary. You can stop at any time.</p>
+  </div>
+
+  <!-- 2. Why do they do it? -->
+  <div class="card fade-item delay-3">
+    <h2><i class="fas fa-shield-alt"></i> Why do staff ask for screenshares?</h2>
+    <p>To keep the game fair for everyone. They want to confirm you’re not using any unauthorised programs that give you an unfair advantage. It’s not personal – it’s about protecting the community.</p>
+  </div>
+
+  <!-- 3. What will they look at? -->
+  <div class="card fade-item delay-3">
+    <h2><i class="fas fa-search"></i> What will they check?</h2>
+    <p>They’ll ask to see a few places on your PC. Here’s the simple version:</p>
+    <div class="step-mini"><div class="num">1</div><div class="content"><strong>Running programs</strong> – they open Task Manager (Ctrl+Shift+Esc) to see what’s currently active.</div></div>
+    <div class="step-mini"><div class="num">2</div><div class="content"><strong>Your Minecraft folder</strong> – they peek inside <code>.minecraft</code>, especially <strong>mods</strong> and <strong>versions</strong> folders.</div></div>
+    <div class="step-mini"><div class="num">3</div><div class="content"><strong>Startup apps</strong> – they check what programs launch when Windows starts (just a quick list).</div></div>
+    <div class="step-mini"><div class="num">4</div><div class="content"><strong>Recent files</strong> – a glance at Downloads or Desktop for any new, unfamiliar files.</div></div>
+    <div class="step-mini"><div class="num">5</div><div class="content"><strong>Extra tools</strong> – sometimes they run a safe scanner that only reads files (it doesn’t install anything).</div></div>
+    <p style="margin-top:10px;">They <strong>will not</strong> look at your personal files (photos, documents, etc.) – only what’s relevant to the game.</p>
+  </div>
+
+  <!-- 4. What should you do? -->
+  <div class="card fade-item delay-4">
+    <h2><i class="fas fa-lightbulb"></i> How should you prepare?</h2>
+    <ul>
+      <li><strong>Stay calm</strong> – it’s a normal procedure. Just follow the staff member’s instructions.</li>
+      <li><strong>Be cooperative</strong> – answer questions honestly and open folders when asked.</li>
+      <li><strong>Ask if you’re confused</strong> – they should explain everything in simple terms.</li>
+      <li><strong>Close extra apps</strong> – it makes the process faster.</li>
+      <li><strong>Have your voice chat ready</strong> – they’ll guide you through.</li>
+    </ul>
+    <div class="text-center mt-2">
+      <button class="btn btn-primary btn-pulse" onclick="alert('📋 Quick reminder: Stay calm, cooperate, ask questions, and it will be over in a few minutes. You’re in control.')">
+        <i class="fas fa-clipboard-check"></i> Show me a quick summary
+      </button>
+    </div>
+  </div>
+
+  <!-- 5. Privacy and your rights -->
+  <div class="card fade-item delay-5">
+    <h2><i class="fas fa-lock"></i> Your privacy & rights</h2>
+    <ul>
+      <li><strong>Only share with trusted staff</strong> – verify they are official.</li>
+      <li><strong>Share your screen, NOT control</strong> – they should never take over your mouse or keyboard.</li>
+      <li><strong>You can say “stop” anytime</strong> – no questions asked, no penalties.</li>
+      <li><strong>Recordings are kept private</strong> – only used for this check.</li>
+    </ul>
+    <div class="flex-center mt-2"><span class="highlight"><i class="fas fa-check-circle"></i> You’re always in control</span></div>
+  </div>
+
+  <!-- 6. Common terms (glossary) -->
+  <div class="card fade-item delay-5">
+    <h2><i class="fas fa-book-open"></i> Simple glossary of terms you might hear</h2>
+    <div class="glossary-grid">
+      <div class="glossary-item"><strong>Obfuscation</strong><div class="def">Code that’s made hard to read – sometimes used by cheat makers, but also by legitimate mods. It’s a clue, not proof.</div></div>
+      <div class="glossary-item"><strong>Signature</strong><div class="def">A known pattern that detectors look for. A match can be a lead, but sometimes it’s a false alarm.</div></div>
+      <div class="glossary-item"><strong>Hash</strong><div class="def">A unique fingerprint for a file. If two files have the same hash, they are identical.</div></div>
+      <div class="glossary-item"><strong>Prefetch</strong><div class="def">A Windows record that shows a program ran and roughly when – helps build a timeline.</div></div>
+      <div class="glossary-item"><strong>BAM</strong><div class="def">Another Windows record that tracks program activity – used to confirm other records.</div></div>
+      <div class="glossary-item"><strong>Amcache</strong><div class="def">A history of file details, even if the file is now deleted – can show what was once on your PC.</div></div>
+      <div class="glossary-item"><strong>USN Journal</strong><div class="def">A log of file changes (created, renamed, deleted) – helps explain missing files.</div></div>
+      <div class="glossary-item"><strong>False positive</strong><div class="def">A warning that looks suspicious but has an innocent explanation – that’s why one tool result is never final.</div></div>
+    </div>
+  </div>
+
+  <!-- 7. Final tips -->
+  <div class="card fade-item delay-5">
+    <h2><i class="fas fa-star"></i> Final tips for a smooth experience</h2>
+    <ul>
+      <li>If you’re unsure about a file, just ask – it might be harmless.</li>
+      <li>Remember that false alarms happen – a weird file doesn’t mean you’re guilty.</li>
+      <li>The staff are there to help, not to trick you. Be honest and it will be quick.</li>
+      <li>After the screenshare, you can go back to playing normally.</li>
+    </ul>
+  </div>
+
+  <!-- Action button -->
+  <div class="text-center" style="margin-top:20px;">
+    <a href="#" class="btn btn-outline" onclick="alert('📌 Remember: A screenshare is just a conversation with proof. Stay honest, stay calm, and everything will be fine. — Tim$erz'); return false;">
+      <i class="fas fa-bookmark"></i> Save this guide
+    </a>
+  </div>
+
+  <footer class="footer">
+    <i class="fas fa-hat-wizard"></i> Magicians Quote Of The Day · by Tim$erz · <i class="fas fa-magic"></i> for everyone
+  </footer>
+
+  <script>
+    const quotes = [
+      { text: "The best magicians don't hide the truth — they make it obvious enough that nobody looks.", author: "Tim$erz" },
+      { text: "Fair play is the greatest trick of all.", author: "Tim$erz" },
+      { text: "A screenshare is just a conversation with proof.", author: "Tim$erz" },
+      { text: "Trust, but verify. That's the magic word.", author: "Tim$erz" }
+    ];
+    let qIndex = 0;
+    const quoteText = document.querySelector('.quote-text');
+    const quoteAuthor = document.querySelector('.quote-text span');
+    document.querySelector('.quote-box').addEventListener('click', function() {
+      qIndex = (qIndex + 1) % quotes.length;
+      const q = quotes[qIndex];
+      const textNode = quoteText.childNodes[0];
+      if (textNode) textNode.textContent = q.text + ' ';
+      quoteAuthor.textContent = '— ' + q.author + ', today';
+    });
+  </script>
+</div>
+</body>
+</html>
