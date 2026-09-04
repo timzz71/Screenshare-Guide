@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magicians Quote · Trial SSer Handbook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0e17;
+      color: #e8edf5;
+      padding: 20px 16px 50px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 0 20px;
+      border-bottom: 1px solid #1e2a3a;
+      margin-bottom: 30px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-left .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f9d976, #f39c12);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .header-left .logo i {
+      -webkit-text-fill-color: #f1c40f;
+      margin-right: 6px;
+    }
+    .header-left .badge {
+      background: #1a2536;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #8aa3c9;
+      border: 1px solid #2a4058;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: #8aa3c9;
+    }
+    .header-right i { color: #f1c40f; margin-right: 4px; }
+    .quote-mini {
+      background: #141e2b;
+      padding: 6px 16px;
+      border-radius: 30px;
+      border-left: 3px solid #f1c40f;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: #b8cce0;
+      cursor: pointer;
+      transition: 0.2s;
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .quote-mini:hover { background: #1c2a3c; }
+    .quote-mini span { color: #f1c40f; font-style: normal; font-weight: 600; }
+
+    /* SECTIONS */
+    .section {
+      background: #111b26;
+      border-radius: 20px;
+      padding: 28px 30px;
+      margin-bottom: 30px;
+      border: 1px solid #1a2536;
+      transition: 0.2s;
+    }
+    .section:hover { border-color: #2a4058; }
+    .section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+    }
+    .section h2 i { color: #f1c40f; width: 32px; font-size: 1.4rem; }
+    .section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 22px 0 10px;
+      color: #d6e4f0;
+    }
+    .section h3 i { color: #5b9aff; margin-right: 10px; }
+    .section p, .section li {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #b8cce0;
+    }
+    .section ul, .section ol { padding-left: 24px; margin: 10px 0 16px; }
+    .section li { margin-bottom: 8px; }
+    .highlight-box {
+      background: #1a2536;
+      border-left: 4px solid #f1c40f;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    .highlight-box strong { color: #f1c40f; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0;
+    }
+    .artifact-card {
+      background: #0f1722;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid #1e2a3a;
+    }
+    .artifact-card h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .artifact-card .why {
+      font-size: 0.9rem;
+      color: #8aa3c9;
+      margin-top: 6px;
+    }
+    .artifact-card .why::before { content: "⚡ "; color: #f1c40f; }
+
+    /* TOOL SECTION (now at the bottom) */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin: 20px 0 28px;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      background: #0f1722;
+      border-radius: 40px;
+      padding: 0 18px;
+      border: 1px solid #1e2a3a;
+      transition: 0.2s;
+    }
+    .search-box:focus-within { border-color: #f1c40f; }
+    .search-box i { color: #5a7088; }
+    .search-box input {
+      background: transparent;
+      border: none;
+      padding: 12px 14px;
+      color: #e8edf5;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      font-family: inherit;
+    }
+    .search-box input::placeholder { color: #4a5a70; }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-btn {
+      background: #0f1722;
+      border: 1px solid #1e2a3a;
+      color: #8aa3c9;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: #3a5a7a; color: #fff; }
+    .filter-btn.active { background: #f1c40f; color: #0a0e17; border-color: #f1c40f; }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .tool-card {
+      background: #0f1722;
+      border-radius: 14px;
+      padding: 18px 20px;
+      border: 1px solid #1a2536;
+      transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .tool-card:hover { border-color: #2a4058; transform: translateY(-3px); box-shadow: 0 12px 30px -10px rgba(0,0,0,0.7); }
+    .tool-card .tool-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .tool-card .tool-name { font-size: 1rem; font-weight: 700; color: #fff; }
+    .tool-card .tool-tag {
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: #1a2536;
+      color: #8aa3c9;
+      border: 1px solid #1e2a3a;
+      white-space: nowrap;
+    }
+    .tool-card .tool-tag.ps1 { background: #1a2a3a; color: #5b9aff; border-color: #2a4a6a; }
+    .tool-card .tool-tag.github { background: #1a2a2a; color: #6cc4a0; border-color: #2a4a4a; }
+    .tool-card .tool-tag.exe { background: #2a1a2a; color: #d47b9a; border-color: #4a2a3a; }
+    .tool-card .tool-tag.web { background: #1a1a2a; color: #b08ad4; border-color: #3a2a4a; }
+    .tool-card .tool-desc { color: #b0c4de; font-size: 0.85rem; line-height: 1.5; margin: 4px 0 10px; flex: 1; }
+    .tool-card .tool-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-top: 1px solid #1a2536;
+      padding-top: 12px;
+    }
+    .tool-card .tool-actions a, .tool-card .tool-actions button {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: inherit;
+      background: #1a2536;
+      color: #b0c4de;
+      border: 1px solid #1e2a3a;
+    }
+    .tool-card .tool-actions a:hover, .tool-card .tool-actions button:hover { background: #2a4058; color: #fff; }
+    .tool-card .tool-actions .copy-btn { background: #1a2a2a; color: #6cc4a0; border-color: #2a4a4a; }
+    .tool-card .tool-actions .copy-btn:hover { background: #2a4a4a; }
+    .tool-card .tool-actions .link-btn { background: #1a2a3a; color: #5b9aff; border-color: #2a4a6a; }
+    .tool-card .tool-actions .link-btn:hover { background: #2a4a6a; }
+    .no-results { text-align: center; padding: 40px 20px; color: #5a7088; grid-column: 1 / -1; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .header { flex-direction: column; align-items: stretch; gap: 10px; }
+      .header-right { flex-wrap: wrap; justify-content: space-between; }
+      .quote-mini { max-width: 100%; white-space: normal; font-size: 0.75rem; }
+      .section { padding: 20px 16px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding: 20px 0;
+      border-top: 1px solid #1a2536;
+      font-size: 0.8rem;
+      color: #4a5a70;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer .disclaimer { max-width: 600px; font-size: 0.7rem; line-height: 1.5; color: #3a4a5a; }
+    .footer .disclaimer i { color: #f1c40f; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo"><i class="fas fa-hat-wizard"></i>Magicians Quote</div>
+      <span class="badge">Trial SSer Handbook</span>
+    </div>
+    <div class="header-right">
+      <span><i class="fas fa-user"></i> Tim$erz</span>
+      <div class="quote-mini" id="quoteDisplay" title="Click for another quote">
+        <i class="fas fa-quote-left" style="margin-right:6px;color:#f1c40f;"></i>
+        <span id="quoteText">Evidence + Context + Consistency</span>
+        <span id="quoteAuthor" style="margin-left:6px;">— Tim$erz</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- SECTION 1: THE MINDSET -->
+  <!-- ========================================================= -->
+  <div class="section">
+    <h2><i class="fas fa-brain"></i> The Screenshare Mindset</h2>
+    <p>As a trial staff member, your job is <strong>not</strong> to be a hacker. Your job is to be a <strong>detective</strong>. You are reading the story that a computer's files and logs tell.</p>
+    <div class="highlight-box">
+      <strong>Remember this formula:</strong> Evidence + Context + Consistency = Decision.
+    </div>
+    <ul>
+      <li><strong>Evidence</strong> – a file, a log entry, a registry key that you find.</li>
+      <li><strong>Context</strong> – was it run at the right time? Does the player have a legitimate reason for it?</li>
+      <li><strong>Consistency</strong> – do multiple sources (Prefetch, BAM, Amcache) tell the same story?</li>
+    </ul>
+    <p style="margin-top:10px;">A single flagged file is a <strong>lead</strong>, not a verdict. Strong decisions come from multiple artifacts agreeing with one another and a clear explanation of what happened.</p>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SECTION 2: THE 5‑STEP WALKTHROUGH -->
+  <!-- ========================================================= -->
+  <div class="section">
+    <h2><i class="fas fa-shoe-prints"></i> The 5‑Step Walkthrough</h2>
+    <p>This is your procedure. Follow these steps in order. If a result is confusing, <strong>pause, save it, and ask a senior staff member</strong>.</p>
+
+    <h3><i class="fas fa-1"></i> Explain the check</h3>
+    <p>Tell the player what you will look at, why you are checking it, and how long it should take. Keep the conversation calm and private. <strong>Consent is mandatory</strong> – they must agree to the process.</p>
+
+    <h3><i class="fas fa-2"></i> Record first</h3>
+    <p><strong>Freeze the player</strong> (use /freeze). Start your screen recording before opening any tool. Note down: player name, your name, reason for the check, and the current time. This preserves the <strong>chain of evidence</strong>.</p>
+
+    <h3><i class="fas fa-3"></i> Check for changes</h3>
+    <p>Before trusting logs and files, check for signs of tampering:</p>
+    <ul>
+      <li>Are there <strong>cleared event logs</strong>?</li>
+      <li>Has the <strong>USN Journal</strong> been shrunk or deleted?</li>
+      <li>Are <strong>Prefetch files</strong> missing or set to read‑only?</li>
+      <li>Is <strong>Test Signing</strong> enabled? (This halts the scan – an environment with test signing on can't be trusted.)</li>
+    </ul>
+    <p>A warning here is a <strong>clue</strong>, not a guilty result. It tells you that the timeline might be incomplete or altered.</p>
+
+    <h3><i class="fas fa-4"></i> Make a timeline</h3>
+    <p>Use <strong>two or more Windows records</strong> to answer:</p>
+    <ul>
+      <li>What programs ran?</li>
+      <li>When did they run?</li>
+      <li>Do the records agree with each other?</li>
+    </ul>
+    <p>Cross‑reference <strong>Prefetch</strong>, <strong>BAM</strong>, <strong>Amcache</strong>, and the <strong>USN Journal</strong>. If they don't agree, document the discrepancy.</p>
+
+    <h3><i class="fas fa-5"></i> Review the client</h3>
+    <p>Now, and only now, look at the client itself:</p>
+    <ul>
+      <li>Check <code>.minecraft/mods</code> and <code>versions</code> folders.</li>
+      <li>Run signature‑based client detectors (e.g., MeowClientFucker).</li>
+      <li>Use <strong>advanced memory checks</strong> <em>only</em> when earlier evidence justifies them – they are slow and invasive.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SECTION 3: ARTIFACT DEEP‑DIVE (The "Why") -->
+  <!-- ========================================================= -->
+  <div class="section">
+    <h2><i class="fas fa-book-open"></i> Artifact Deep‑Dive</h2>
+    <p>You will see these terms in every SS tool. Here is what they actually mean and <strong>why</strong> we care about them.</p>
+    <div class="grid-2">
+      <div class="artifact-card">
+        <h4>📁 Prefetch</h4>
+        <p>A Windows record that shows a program ran and <strong>roughly when</strong>.</p>
+        <div class="why">It helps build a timeline. It does <em>not</em> prove what the player did inside the program – only that it launched.</div>
+      </div>
+      <div class="artifact-card">
+        <h4>📊 BAM</h4>
+        <p>Background Activity Moderator – another Windows record of program activity.</p>
+        <div class="why">Use it to <strong>confirm or challenge</strong> a Prefetch result. Agreement between sources is stronger than one hit.</div>
+      </div>
+      <div class="artifact-card">
+        <h4>📋 Amcache</h4>
+        <p>A Windows history of file details that may remain <strong>after a file moves or disappears</strong>.</p>
+        <div class="why">It can show that a file was present in the past. It cannot tell you exactly how the player used it.</div>
+      </div>
+      <div class="artifact-card">
+        <h4>📝 USN Journal</h4>
+        <p>A Windows record of files being <strong>created, renamed, changed, or deleted</strong>.</p>
+        <div class="why">It helps explain missing files and gaps in a timeline. Always compare paths and timestamps with other records.</div>
+      </div>
+      <div class="artifact-card">
+        <h4>🔐 Hash</h4>
+        <p>A short <strong>fingerprint</strong> for one exact file.</p>
+        <div class="why">If two hashes match, the files are identical. If a file changes by one byte, its hash changes too. Used to identify known cheats.</div>
+      </div>
+      <div class="artifact-card">
+        <h4>⚠️ False Positive</h4>
+        <p>A warning that looks suspicious but has an <strong>innocent explanation</strong>.</p>
+        <div class="why">This is why one tool result should never be treated as a final verdict – always cross‑check.</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <strong>Pro tip:</strong> Always ask yourself – "Does this artifact make sense with the player's explanation?" If a file is flagged but the player has a legit reason (e.g., a known mod), document it and move on.
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SECTION 4: HANDLING THE PLAYER (Soft Skills) -->
+  <!-- ========================================================= -->
+  <div class="section">
+    <h2><i class="fas fa-handshake"></i> Handling the Player</h2>
+    <p>A screenshare is a <strong>conversation</strong> with proof. How you talk to the player matters just as much as the tools you run.</p>
+    <ul>
+      <li><strong>Stay calm and objective</strong> – keep comments factual. Never accuse; simply state what you see.</li>
+      <li><strong>Explain each step</strong> – tell them what you are about to check and why. This builds trust.</li>
+      <li><strong>Respect privacy</strong> – only look at what is relevant to the game. Personal files (photos, documents) are off‑limits.</li>
+      <li><strong>They can say "stop"</strong> – a screenshare is voluntary. If they withdraw consent, stop immediately and document it.</li>
+      <li><strong>Keep SS details confidential</strong> – do not share findings in public chats. This is between you, the player, and senior staff.</li>
+    </ul>
+    <div class="highlight-box">
+      <strong>Staff standard:</strong> Professional, private, precise. No public arguments, no permissions abuse, protect confidentiality.
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SECTION 5: THE TOOL REFERENCE (Now with context) -->
+  <!-- ========================================================= -->
+  <div class="section">
+    <h2><i class="fas fa-tools"></i> The Tool Reference</h2>
+    <p>These are the tools we use to find the artifacts mentioned above. They are grouped by <strong>what they solve</strong>, not just by name. </p>
+    <p><strong>When to run:</strong></p>
+    <ul>
+      <li><strong>Phase 1 (Anti‑forensic):</strong> Run <em>first</em> to check if the evidence trail has been tampered with.</li>
+      <li><strong>Phase 2 (Artifact):</strong> Build your timeline – Prefetch, BAM, Amcache, USN Journal.</li>
+      <li><strong>Phase 3 (Mods / Macro / Services):</strong> Inspect the game client, macros, and system services.</li>
+      <li><strong>Phase 4 (Client):</strong> Use signature‑based detectors for known cheat clients.</li>
+    </ul>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search tools by name, category..." />
+      </div>
+      <div class="filter-group" id="filterGroup">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="anti-forensic">Phase 1</button>
+        <button class="filter-btn" data-filter="artifact">Phase 2</button>
+        <button class="filter-btn" data-filter="mods">Phase 3</button>
+        <button class="filter-btn" data-filter="macro">Phase 3</button>
+        <button class="filter-btn" data-filter="services">Phase 3</button>
+        <button class="filter-btn" data-filter="client">Phase 4</button>
+        <button class="filter-btn" data-filter="others">Other</button>
+      </div>
+    </div>
+
+    <!-- Tools Grid -->
+    <div class="tools-grid" id="toolsGrid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="disclaimer">
+      <i class="fas fa-triangle-exclamation"></i>
+      The catalog surfaces supplied external tools and commands as references only.
+      Verify a repository, release, or raw script before running it on an investigation machine,
+      and preserve evidence before using any remediation option.
+    </div>
+    <div>
+      <i class="fas fa-magic" style="color:#f1c40f;margin-right:6px;"></i>
+      Magicians Quote DFIR · by Tim$erz
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ============================================================
+  // TOOL DATABASE (55+ tools)
+  // ============================================================
+  const tools = [
+    // Phase 1 - Anti-forensic
+    { id: 'meowresolver', name: 'MeowResolver', category: 'anti-forensic', type: 'ps1', desc: 'Detects and reverses bypass / anti-forensic tampering across registry, event logs, and filesystem.', phase: 1, link: 'https://raw.githubusercontent.com/MeowTonynoh/MeowResolver/main/MeowResolver.ps1', command: 'powershell -Command "Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/MeowTonynoh/MeowResolver/main/MeowResolver.ps1\')"' },
+    { id: 'filelessbypass', name: 'FilelessBypassDetection', category: 'anti-forensic', type: 'ps1', desc: 'Scans for fileless-execution bypass artifacts, in-memory loaders, and reflection-based injection traces.', phase: 1, link: 'https://raw.githubusercontent.com/l4rpsucks/Scripts/main/FilelessBypassDetection.ps1', command: 'powershell -Command "Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/l4rpsucks/Scripts/refs/heads/main/FilelessBypassDetection.ps1\')"' },
+    // Phase 2 - Artifact
+    { id: 'prefetchview', name: 'PrefetchView', category: 'artifact', type: 'github', desc: 'Parses .pf files, verifies signatures, runs YARA, and cross-checks USN Journal evidence.', phase: 2, link: 'https://github.com/Orbdiff/PrefetchView', command: '' },
+    { id: 'bamreveal', name: 'BAMReveal', category: 'artifact', type: 'github', desc: 'Parses Background Activity Moderator data for independent execution evidence.', phase: 2, link: 'https://github.com/Orbdiff/BAMReveal', command: '' },
+    { id: 'userassistview', name: 'UserAssistView', category: 'artifact', type: 'github', desc: 'Parses UserAssist registry artifacts including execution counts, timestamps, and focus metrics.', phase: 2, link: 'https://github.com/Orbdiff/UserAssistView', command: '' },
+    { id: 'amcacheview', name: 'AmcacheView', category: 'artifact', type: 'github', desc: 'Parses Amcache and cross-references entries with on-disk details, signatures, and journal activity.', phase: 2, link: 'https://github.com/spokwn/AmcacheView', command: '' },
+    { id: 'journalparser', name: 'JournalParser', category: 'artifact', type: 'github', desc: 'Parses the USN Journal directly via the $J datastream for deletion and rename confirmation.', phase: 2, link: 'https://github.com/Orbdiff/JournalParser', command: '' },
+    { id: 'stringsparser', name: 'StringsParser', category: 'artifact', type: 'github', desc: 'Extracts and matches known cheat-signature strings in binaries or memory dumps.', phase: 2, link: 'https://github.com/Orbdiff/StringsParser', command: '' },
+    { id: 'usbdetector', name: 'USBDetector', category: 'artifact', type: 'github', desc: 'Flags USB connection history for removable-media loading or mid-investigation device swaps.', phase: 2, link: 'https://github.com/Orbdiff/USBDetector', command: '' },
+    // Phase 3 - Mods
+    { id: 'meowmodanalyzer', name: 'MeowModAnalyzer', category: 'mods', type: 'ps1', desc: 'Static analysis of .minecraft/mods; classifies files, flags obfuscation, and checks known module names.', phase: 3, link: 'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1', command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1\')"' },
+    { id: 'zeezyparser', name: 'zeezyparser.ps1', category: 'mods', type: 'ps1', desc: 'Parses JAR contents from the versions/mods folder rather than relying only on signature matching.', phase: 3, link: 'https://raw.githubusercontent.com/zeezyexe/zeezy-jar-parser/main/zeezyparser.ps1', command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/zeezy-jar-parser/refs/heads/main/zeezyparser.ps1\')"' },
+    // Phase 3 - Macro
+    { id: 'catchmacro', name: 'catchmacro.ps1', category: 'macro', type: 'ps1', desc: 'Macro scanner designed to identify macro-related indicators.', phase: 3, link: 'https://raw.githubusercontent.com/zeezyexe/macro-scanner/main/catchmacro.ps1', command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/macro-scanner/refs/heads/main/catchmacro.ps1\')"' },
+    // Phase 3 - Services
+    { id: 'zeezyservices', name: 'zeezyservices.ps1', category: 'services', type: 'ps1', desc: 'Checks running and installed Windows services for known bypass / cheat-loader indicators.', phase: 3, link: 'https://raw.githubusercontent.com/zeezyexe/services-checker/main/zeezyservices.ps1', command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/zeezyexe/services-checker/refs/heads/main/zeezyservices.ps1\')"' },
+    // Phase 4 - Client
+    { id: 'meowclientfucker', name: 'MeowClientFucker', category: 'client', type: 'exe', desc: 'General-purpose client detector; release executable is run directly.', phase: 4, link: 'https://github.com/MeowTonynoh/MeowClientFucker/releases', command: '' },
+    { id: 'meowdoomsdayfucker', name: 'MeowDoomsdayFucker', category: 'client', type: 'exe', desc: 'Doomsday detector with live-memory signature scanning and historical Prefetch trace analysis.', phase: 4, link: 'https://github.com/MeowTonynoh/MeowDoomsdayFucker/releases', command: '' },
+    { id: 'meownovowarefucker', name: 'MeowNovowareFucker', category: 'client', type: 'exe', desc: 'Novoware-specific client detector.', phase: 4, link: 'https://github.com/MeowTonynoh/MeowNovowareFucker/releases', command: '' },
+    { id: 'dqrkisfucker', name: 'DQRKIS-FUCKER', category: 'client', type: 'ps1', desc: 'DQRKIS client artifact detector.', phase: 4, link: 'https://raw.githubusercontent.com/cheesecatlol/DQRKIS-FUCKER/main/DqrkisFucker.ps1', command: 'powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod \'https://raw.githubusercontent.com/cheesecatlol/DQRKIS-FUCKER/refs/heads/main/DqrkisFucker.ps1\')"' },
+    // Others (Zimmerman, NirSoft, etc.)
+    { id: 'r laltchecker', name: 'RL AltChecker', category: 'others', type: 'github', desc: 'RedLotus – checks for alternate-account indicators.', phase: 0, link: 'https://github.com/RedLotus/RL-AltChecker', command: '' },
+    { id: 'computeractivityview', name: 'ComputerActivityView', category: 'others', type: 'web', desc: 'NirSoft – timeline of computer activity events.', phase: 0, link: 'https://www.nirsoft.net/utils/computer_activity_view.html', command: '' },
+    { id: 'amcacheparser', name: 'AmcacheParser', category: 'others', type: 'web', desc: 'Parses AMCache with YARA and signatures.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'systeminformer', name: 'SystemInformer', category: 'others', type: 'web', desc: 'Advanced process and kernel inspector.', phase: 0, link: 'https://systeminformer.sourceforge.io/', command: '' },
+    { id: 'dieengine', name: 'DIE-engine', category: 'others', type: 'web', desc: 'Detects file type, packer, and compiler.', phase: 0, link: 'https://github.com/horsicq/Detect-It-Easy', command: '' },
+    { id: 'jarabel', name: 'Jarabel', category: 'others', type: 'github', desc: 'Locates .jar files with detailed checks.', phase: 0, link: 'https://github.com/Jarabel/Jarabel', command: '' },
+    { id: 'luyten', name: 'Luyten', category: 'others', type: 'github', desc: 'Open-source Java decompiler GUI using Procyon for static analysis.', phase: 0, link: 'https://github.com/deathmarine/Luyten', command: '' },
+    { id: 'vmaware', name: 'VMAware', category: 'others', type: 'github', desc: 'Advanced VM detection library and tool.', phase: 0, link: 'https://github.com/CheckPointSW/VMAware', command: '' },
+    { id: 'velociraptor', name: 'Velociraptor', category: 'others', type: 'github', desc: 'Endpoint DFIR and threat-hunting agent for deeper investigations.', phase: 0, link: 'https://github.com/Velocidex/velociraptor', command: '' },
+    { id: 'ntfsparser', name: 'NTFS Parser', category: 'others', type: 'github', desc: 'NTFS forensics covering MFT, BitLocker, and USN data.', phase: 0, link: 'https://github.com/libyal/libfsntfs', command: '' },
+    { id: 'hayabusa', name: 'Hayabusa', category: 'others', type: 'github', desc: 'Fast forensic timeline generator.', phase: 0, link: 'https://github.com/Yamato-Security/hayabusa', command: '' },
+    { id: 'everything', name: 'Everything', category: 'others', type: 'web', desc: 'Instant filename search engine for Windows.', phase: 0, link: 'https://www.voidtools.com/', command: '' },
+    { id: 'hxd', name: 'HxD', category: 'others', type: 'web', desc: 'Hex editor with disk and RAM editing capabilities.', phase: 0, link: 'https://mh-nexus.de/en/hxd/', command: '' },
+    { id: 'bstrings', name: 'bstrings', category: 'others', type: 'web', desc: 'Zimmerman – searches strings with regex and YARA.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'jlecmd', name: 'JLECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses Windows Jump List files from the CLI.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'jumplistexplorer', name: 'JumpListExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for Jump List artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'mftecmd', name: 'MFTECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses MFT, UsnJrnl, LogFile, and Boot records.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'pecmd', name: 'PECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses Windows Prefetch files from the CLI.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'recentfilecacheparser', name: 'RecentFileCacheParser', category: 'others', type: 'web', desc: 'Zimmerman – parses RecentFileCache.bcf artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'registryexplorer', name: 'RegistryExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for Windows registry hives.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'shellbagsexplorer', name: 'ShellBagsExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI explorer for ShellBags artifacts.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'srumecmd', name: 'SrumECmd', category: 'others', type: 'web', desc: 'Zimmerman – parses the SRUM database for usage data.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'timelineexplorer', name: 'TimelineExplorer', category: 'others', type: 'web', desc: 'Zimmerman – GUI viewer for CSV timeline output.', phase: 0, link: 'https://ericzimmerman.github.io/#!index.md', command: '' },
+    { id: 'fulleventlogview', name: 'FullEventLogView', category: 'others', type: 'web', desc: 'NirSoft – views all Windows event log entries.', phase: 0, link: 'https://www.nirsoft.net/utils/full_event_log_view.html', command: '' },
+    { id: 'networkusageview', name: 'NetworkUsageView', category: 'others', type: 'web', desc: 'NirSoft – shows network usage per process.', phase: 0, link: 'https://www.nirsoft.net/utils/network_usage_view.html', command: '' },
+    { id: 'browserdownloadsview', name: 'BrowserDownloadsView', category: 'others', type: 'web', desc: 'NirSoft – lists browser download history.', phase: 0, link: 'https://www.nirsoft.net/utils/browser_downloads_view.html', command: '' },
+    { id: 'alternatestreamview', name: 'AlternateStreamView', category: 'others', type: 'web', desc: 'NirSoft – reveals hidden NTFS alternate streams.', phase: 0, link: 'https://www.nirsoft.net/utils/alternate_stream_view.html', command: '' },
+    { id: 'usbdeview', name: 'USBDeview', category: 'others', type: 'web', desc: 'NirSoft – lists USB devices previously connected.', phase: 0, link: 'https://www.nirsoft.net/utils/usb_deview.html', command: '' },
+    { id: 'opensavefilesview', name: 'OpenSaveFilesView', category: 'others', type: 'web', desc: 'NirSoft – shows files opened or saved through dialogs.', phase: 0, link: 'https://www.nirsoft.net/utils/open_save_files_view.html', command: '' },
+    { id: 'executedprogramslist', name: 'ExecutedProgramsList', category: 'others', type: 'web', desc: 'NirSoft – lists programs run from various sources.', phase: 0, link: 'https://www.nirsoft.net/utils/executed_programs_list.html', command: '' },
+    { id: 'taskschedulerview', name: 'TaskSchedulerView', category: 'others', type: 'web', desc: 'NirSoft – views scheduled tasks and history.', phase: 0, link: 'https://www.nirsoft.net/utils/task_scheduler_view.html', command: '' },
+    { id: 'jumplistsview', name: 'JumpListsView', category: 'others', type: 'web', desc: 'NirSoft – views Jump List recent and frequent files.', phase: 0, link: 'https://www.nirsoft.net/utils/jump_lists_view.html', command: '' },
+    { id: 'winprefetchview', name: 'WinPrefetchView', category: 'others', type: 'web', desc: 'NirSoft – views Windows Prefetch details.', phase: 0, link: 'https://www.nirsoft.net/utils/win_prefetch_view.html', command: '' },
+    { id: 'regscanner', name: 'RegScanner', category: 'others', type: 'web', desc: 'NirSoft – scans the registry for values and patterns.', phase: 0, link: 'https://www.nirsoft.net/utils/regscanner.html', command: '' },
+    { id: 'shellbagsview', name: 'ShellBagsView', category: 'others', type: 'web', desc: 'NirSoft – views ShellBags folder-access history.', phase: 0, link: 'https://www.nirsoft.net/utils/shell_bags_view.html', command: '' },
+    { id: 'dotnet9', name: '.NET 9.0', category: 'others', type: 'web', desc: 'Microsoft .NET 9 SDK/runtime dependency.', phase: 0, link: 'https://dotnet.microsoft.com/en-us/download/dotnet/9.0', command: '' },
+    { id: 'dotnet10', name: '.NET 10.0', category: 'others', type: 'web', desc: 'Microsoft .NET 10 runtime dependency.', phase: 0, link: 'https://dotnet.microsoft.com/en-us/download/dotnet/10.0', command: '' },
+    { id: 'vsredist', name: 'VSRedist', category: 'others', type: 'web', desc: 'Visual C++ Redistributable for x64.', phase: 0, link: 'https://aka.ms/vs/17/release/vc_redist.x64.exe', command: '' },
+  ];
+
+  // ============================================================
+  // RENDER
+  // ============================================================
+  const grid = document.getElementById('toolsGrid');
+  const searchInput = document.getElementById('searchInput');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  function getTypeLabel(type) {
+    const map = { ps1: 'PS1', github: 'GitHub', exe: 'EXE', web: 'Web' };
+    return map[type] || type;
+  }
+  function getTypeClass(type) {
+    const map = { ps1: 'ps1', github: 'github', exe: 'exe', web: 'web' };
+    return map[type] || '';
+  }
+
+  function renderTools() {
+    const filtered = tools.filter(t => {
+      const matchFilter = currentFilter === 'all' || t.category === currentFilter;
+      const s = currentSearch.toLowerCase().trim();
+      const matchSearch = !s ||
+        t.name.toLowerCase().includes(s) ||
+        t.category.toLowerCase().includes(s) ||
+        t.desc.toLowerCase().includes(s);
+      return matchFilter && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>No tools match your search or filter.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(t => {
+      let actions = '';
+      if (t.command) {
+        const escaped = t.command.replace(/'/g, "\\'");
+        actions += `<button class="copy-btn" onclick="copyCommand('${escaped}')"><i class="fas fa-copy"></i> Copy PS1</button>`;
+      }
+      if (t.link) {
+        actions += `<a href="${t.link}" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> ${t.type === 'github' ? 'GitHub' : t.type === 'ps1' ? 'Raw' : 'Open'}</a>`;
+      }
+      const phaseLabel = t.phase ? `Phase ${t.phase}` : '';
+      return `
+        <div class="tool-card">
+          <div class="tool-top">
+            <span class="tool-name">${t.name}</span>
+            <span class="tool-tag ${getTypeClass(t.type)}">${getTypeLabel(t.type)} ${phaseLabel}</span>
+          </div>
+          <div class="tool-desc">${t.desc}</div>
+          <div class="tool-actions">${actions}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.copyCommand = function(cmd) {
+    navigator.clipboard.writeText(cmd).then(() => {
+      const btn = event.target.closest('.copy-btn');
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => btn.innerHTML = orig, 2000);
+      }
+    }).catch(() => alert('Failed to copy. Please select and copy manually:\n\n' + cmd));
+  };
+
+  searchInput.addEventListener('input', (e) => { currentSearch = e.target.value; renderTools(); });
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderTools();
+    });
+  });
+
+  // QUOTE ROTATOR
+  const quotes = [
+    { text: "Evidence + Context + Consistency = Decision.", author: "Tim$erz" },
+    { text: "One tool result is a lead, not a verdict.", author: "Tim$erz" },
+    { text: "Preserve first, then investigate.", author: "Tim$erz" },
+    { text: "The best magicians don't hide the truth — they make it obvious.", author: "Tim$erz" },
+    { text: "Trust, but verify. That's the magic word.", author: "Tim$erz" },
+    { text: "A screenshare is a conversation with proof.", author: "Tim$erz" },
+  ];
+  let qIdx = 0;
+  const qText = document.getElementById('quoteText');
+  const qAuthor = document.getElementById('quoteAuthor');
+  document.getElementById('quoteDisplay').addEventListener('click', () => {
+    qIdx = (qIdx + 1) % quotes.length;
+    qText.textContent = quotes[qIdx].text;
+    qAuthor.textContent = '— ' + quotes[qIdx].author;
+  });
+
+  renderTools();
+</script>
+</body>
+</html>
